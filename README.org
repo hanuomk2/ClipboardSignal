@@ -1,0 +1,54 @@
+#+TITLE:	README for ClipboardSignal
+#+AUTHOR:	hanuomk2(odaba)
+#+DATE:		2019-06-11
+
+* ScreenCapture And SystemIcon(by QApplication::clipboard())
+
+Qt(C++)で作成したキャプチャツールです。
+[PrintScreen]キーまたは[Alt]+[PrintScreen]キーを押下して、イメージがクリックポードにコピーされると、
+QApplication::clipboard()のシグナル/スロット(dataChanged())でそれを検出し、
+指定したフォルダに指定した形式のファイル名でJPGファイルを出力します。
+また、SystemtrayIconにアイコンを登録し、右クリックでメニュー表示できます。
+キャプチャ後QPixmapをメッセージ表示します。
+
+** 環境
+
+ - OS: 		Microsoft Windows 10 pro 64bit
+ - IDE: 	QtCreator 4.9.0 
+ - Qt(Ver.):Qt 5.12.2(mingw 7.3.0 64ビット)
+
+** 使い方
+
+適当なフォルダにzipファイルを展開し、
+Qt Creatorで"ClipboardSignal.pro"ファイルを開き、ビルド後実行して下さい。
+
+** ライセンス
+
+Apache License 2.0
+(ソースコードは、Apache Licenseです。
+ もちろん、Qtを使用しているので、コンパイルして再配布する場合、
+ ライブラリ等Qtの部分はLGPL 3.0となります)
+
+** その他
+
+ - SystemtrayIconの右クリックで以下のメニューを表示します。
+   - Capture ON/OFF	::	キャプチャモードのON/OFFを行います(OFFの場合、JPGファイルを保存しません)。
+   - Settings		::	設定ウィンドウを表示します。
+   - Open Folder	::	エクスプローラで、保存先フォルダを表示します。
+   - Open Viewer	::	指定したViewerで、保存先フォルダを表示します(この時キャプチャモードをOFFにします)。
+   - Quit			::	キャプチャツールを終了します。
+   
+ - 設定ウィンドウの「Folder」タブでキャプチャイメージの出力フォルダを指定できます。
+ - 設定ウィンドウの「Filename」タブでキャプチャイメージの出力ファイル形式を
+   「YYYYMMDDhhmmss.ddd」、「カウンター」、「カウンター(0埋め)」から選択できます。
+ - 設定ウィンドウの「Viewer」タブで出力フォルダ内の画像ファイルを表示するViewerを指定できます
+   (指定したViewerの引数として、出力フォルダのパスを指定します)。
+
+ - 設定ウィンドウの設定値は、QSettingを利用して、実行ファイルのあるフォルダ上の
+   "ClipboardSignal.ini"に保存しています(起動時読込/終了時一部書出)。
+
+ - 0埋めはsscanf(const char*, "%0*d", &count)を使用して数値化しています。
+ 
+ - LineEditの境界バグ検出はしていません。
+
+ 
